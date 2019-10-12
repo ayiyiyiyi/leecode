@@ -6,15 +6,15 @@
  */
 var reverse = function(x) {
     let fh = "", re;
-    if(x<0){
+    if (x < 0) {
         fh = "-";
         x = 0 - x;
     }
-    re = ( x + "").split("").reverse().join("");
+    re = (x + "").split("").reverse().join("");
     console.log(re);
-    if(re.length>10 || re.length === 10 && re > (x < 0 ? "2147483648":"2147483647")){
+    if (re.length > 10 || re.length === 10 && re > (x < 0 ? "2147483648" : "2147483647")) {
         return 0;
-    }else{
+    } else {
         return fh + re;
     }
 };
@@ -25,12 +25,18 @@ function standanrAnswer (x) {
     while (x != 0) {
         let pop = x % 10;
         x = parseInt(x / 10);
-        console.log(pop, x);
         
-        let INT_MAX = 2 ** 31 - 1;
-        let INT_MIN = -1 * (2 ** 31);
+        let INT_MAX = 2 ** 31 - 1; // 2147483647
+        let INT_MIN = -1 * (2 ** 31); // -2147483648
+        /**
+         * 0、temp = rev * 10 + pop 
+         * 1、如果 temp 溢出，那么一定 rev >= INT_MAX
+         * 2、如果 rev > INT_MAX ，temp 一定溢出，
+         * 3、如果 rev == INT_MAX, 那么 pop > 7 ,temp 一定溢出
+         */
         if (rev > INT_MAX / 10 || (rev == INT_MAX / 10 && pop > 7)) return 0;
         if (rev < INT_MIN / 10 || (rev == INT_MAX / 10 && pop < -8)) return 0;
+
         rev = rev * 10 + pop;
     }
     return rev;
