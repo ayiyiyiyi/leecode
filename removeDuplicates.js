@@ -18,6 +18,7 @@ let removeDuplicates = function (nums) {
 removeDuplicates(nums);
 //放置两个指针 i 和 j，其中 i 是慢指针，而 j 是快指针。只要 nums[i] = nums[j]，我们就增加 j 以跳过重复项。
 // i代表发现了几次 nums[i] != nums[j]
+
 standardAnswer = function (nums) {
     let i = 0;
     for (let j = 1; j < nums.length; j ++) {
