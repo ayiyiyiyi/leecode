@@ -20,7 +20,7 @@ var reverse = function(x) {
 };
 var number = 230;
 
-function standanrAnswer (x) {
+function standardAnswer (x) {
     let rev = 0;
     while (x != 0) {
         let pop = x % 10;
