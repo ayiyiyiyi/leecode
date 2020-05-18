@@ -41,4 +41,4 @@ function standardAnswer (x) {
     }
     return rev;
 }
-console.log(standanrAnswer(number))
+console.log(standardAnswer(number))
