@@ -23,7 +23,13 @@ var romanToInt = function (s) {
 function romanToIntTwo (s) {
     const map = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000};
     const str = Array.from(s);
+    let sum = 0;
     for (let i = 0; i < str.length; i++) {
-        
+        const current = str[i], next = str[i + 1];
+        let coefficient = map[current] < map[next] ? -1 : 1;
+        sum += coefficient * map[current];
     }
+    return sum;
 }
+
+romanToIntTwo('MCMXCIV')
