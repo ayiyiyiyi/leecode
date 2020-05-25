@@ -51,6 +51,30 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 
 华为 OD 面试时遇到的题目: 当时的思路是,初始 `number = 0`, 找到用例中特殊的罗马数字表示, 将其找出来去除, 并把对应数值 加给 number, 剩下就都是一个罗马字符表示的数字了, 遍历相加, 就能得到转换后的结果.
 
+别人的更好的写法:
+``` JS
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    let keys = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'],
+        values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1],
+        res = 0, idx;
+    while(s.length) {
+        idx = keys.indexOf(s[0] + s[1]);//先判断是不是符合2个字符的单位
+        if(idx >= 0){
+            s = s.substring(2, s.length);
+        }else{
+            idx = keys.indexOf(s[0]);
+            s = s.substring(1, s.length);
+        }
+        res += values[idx];//得到对应的值
+    }
+    return res;
+};
+```
+
 
 ## 别人的思路
 
@@ -61,3 +85,22 @@ IV = -1 + 5 = 4
 MCMXCIV = 1000 + (-100) + 1000 + (-10) + 100 + (-1) + 4
 
 从式子中可以看出来 从左到右遍历罗马数字时, 若左边数字小于又边数字, 则左边应该为负数.
+
+``` JS
+var romanToInt = function(s) {
+    let map = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000},
+        sum = 0, loop = 0, num = 0, now = 0;
+    while(loop < s.length) {
+        now = map[s[loop]];
+        if(num < now) { // num 左边数字, now 右边数字
+            sum -= num;
+        } else {
+            sum += num;
+        }
+        num = now;
+        loop++;
+    }
+    sum += num;
+    return sum;
+};
+```
